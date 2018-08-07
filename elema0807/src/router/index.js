@@ -3,10 +3,10 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 //引入每一个组件
-import Home from '@/components/Home.vue'
-import Discover from '@/components/Discover.vue'
-import Setting from '@/components/Setting.vue'
-import Mine from '@/components/Mine.vue'
+import Home from '@/pages/home/Home.vue'
+import Discover from '@/pages/discover/Discover.vue'
+import Order from '@/pages/order/Order.vue'
+import Mine from '@/pages/mine/Mine.vue'
 
 // 配置
 const routes = [
@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/setting',
     name: 'page3',
-    component: Setting
+    component: Order
   },
   {
     path: '/mine',
