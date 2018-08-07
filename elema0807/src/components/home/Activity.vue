@@ -63,5 +63,4 @@ export default {
     .act-left-now,.act-right-count{
         font-size: 12px
     }
-
 </style>
