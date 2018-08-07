@@ -33,13 +33,13 @@ short_address:"福田区深圳市"
 export function getHomeAddressData(addressDataObj){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_REQUEST_ADDRESS_API,
+        axios.get( API.HOME_REQUEST_ADDRESS_API,{
          params: {
             keyword:addressDataObj.keyword,
             offset:addressDataObj.offset,
             limit:addressDataObj.limit,
         }
-        )
+        })
         .then(response=>{
           
             console.log(response)
