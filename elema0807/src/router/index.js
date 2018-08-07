@@ -7,6 +7,7 @@ import Home from '@/pages/home/Home.vue'
 import Discover from '@/pages/discover/Discover.vue'
 import Order from '@/pages/order/Order.vue'
 import Mine from '@/pages/mine/Mine.vue'
+import Login from '@/pages/mine/Login.vue'
 
 // 配置
 const routes = [
@@ -31,9 +32,12 @@ const routes = [
     component: Mine
   },
   {
-    // path: '/',
+    path: '/login',
+    name: 'page5',
+    component: Login
+  },
+  {
     path: '**',
-    //重定向
     redirect: '/home'
   }
   
