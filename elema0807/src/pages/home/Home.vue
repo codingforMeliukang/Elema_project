@@ -14,6 +14,8 @@
           <!-- 首页轮播 -->
             <Banner></Banner>
 
+            <!-- 首页抢购部分  -->
+            <Activity></Activity>
       </div>
       
         
@@ -23,9 +25,11 @@
 
 <script>
 import Banner from '@/components/home/Banner.vue'
+import Activity from '@/components/home/Activity.vue'
 export default {
     components:{
-        Banner
+        Banner,
+        Activity
     },
     data(){
         
