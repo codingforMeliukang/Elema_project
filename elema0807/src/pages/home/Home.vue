@@ -13,12 +13,11 @@
           </div>
           <!-- 首页轮播 -->
           <Banner></Banner>
-           
-          <goods></goods>
-       
-         
-
-
+        
+            <!-- 首页抢购部分  -->
+            <Activity></Activity>
+          <!-- 餐馆列表  -->
+            <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"></food-list>
       </div>
       
         
@@ -29,12 +28,15 @@
 <script>
 import {getHomeAddressData,getHomebannerGoodsData,getHomeRestaurantsData} from './../../services/homedata.js'
 import Banner from '@/components/home/Banner.vue'
-import Goods  from  './../../components/foodlist/FoodList.vue' 
+
+import FoodList  from  './../../components/foodlist/FoodList.vue' 
+import Activity from '@/components/home/Activity.vue'
 export default {
     components:{
         Banner,
-        Goods
-    },
+        FoodList,
+        Activity
+},
     data(){
         return{
            restaurantsobj:{
@@ -42,13 +44,15 @@ export default {
                 longitude:113.814549,      //经度 
                 offset:0,
                 limit:8,
-           } 
+                
+           },
+            restaurantsData:[]
         }
     },
     created(){
-        getHomebannerGoodsData(this.restaurantsobj).then(result=>{
-
-            console.log(result)
+        getHomeRestaurantsData(this.restaurantsobj).then(result=>{
+            this.restaurantsData=result
+            console.log(this.restaurantsData)
 
         })
 

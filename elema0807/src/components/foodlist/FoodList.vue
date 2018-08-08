@@ -1,7 +1,6 @@
 <template>
    <div class="foodlist">
         <div class="section">
-
             <div class="foodsinfo">
                 <div class="foodlogo">
                     <div class="logomain">
@@ -12,32 +11,33 @@
                 <div class="foodcontent">
 
                     <section class="foodsamestyle">
-                        <h3 class="shopname">王鸡汤(景田店)</h3>
+                        <h3 class="shopname">{{mainresdata.name}}</h3>
                         <ul class="saveticket">
-                            <li>保</li>
-                            <li>票</li>
+                            <li v-for="(item,index) in mainresdata.supports" :key="index">{{item.icon_name}}</li>
+
+                    
                         </ul>
                     </section>
 
                     <section class="foodsamestyle mid">
                         <div class="foodevaluate">
                             <div class="star">★★★☆☆</div>
-                            <span class="score">4.7</span>
-                            <span class="salenum">月售2336单</span>    
+                            <span class="score">{{mainresdata.rating}}</span>
+                            <span class="salenum">月售{{mainresdata.recent_order_num}}单</span>    
                         </div>
-                        <div class="dilivery">蜂鸟专送</div>
+                        <div class="dilivery" v-if="mainresdata.delivery_mode">蜂鸟专送</div>
                     </section>
 
                     <section class="foodsamestyle">
                         <div class="moneytips">
-                            <span>$20起送</span>
+                            <span>¥{{mainresdata.float_minimum_order_amount}}起送</span>
                             <span class="mt4">|</span>
-                            <span>配送费$4.5</span>
+                            <span>配送费¥{{mainresdata.float_delivery_fee}}</span>
                         </div>
                         <div class="distantime">
-                            <span class="distance">2.25km</span>
+                            <span class="distance">{{(mainresdata.distance/1000).toFixed(2)}}km</span>
                             <span class="mt4">|</span>
-                            <span>32分钟</span>
+                            <span>{{mainresdata.order_lead_time}}分钟</span>
                         </div>
                     </section>
 
@@ -46,9 +46,9 @@
 
 <!--模板下层的活动信息-->
 
-            <div class="activity">
+            <div class="foodactivity">
                 <section class="activetop foodstype">
-                    <span class="fsicon">香锅砂锅</span>
+                    <span class="fsicon">{{mainresdata.flavors[0].name}}</span>
                     <span class="fsicon">品质联盟</span>
                     <span class="popularity">
                         
@@ -57,29 +57,31 @@
                     </span>
 
                 </section>
-                <div></div>
+                <div class="space"></div>
                 <section class="activetop">
                     <div class="activitytype">
                         <div>
-                            <span>首页</span>
-                            <span>新用户下单立减22元</span>  
+                            <span class="actop">{{mainresdata.activities[0].icon_name}}</span>
+                            <span>{{mainresdata.activities[0].description}}</span>  
                         </div>
                         <div>
-                            <span>满</span>
-                            <span>满22减22，满62减30，满98减39，满128减52，满188减69</span>  
+                            <span class="reduce">{{mainresdata.activities[1].icon_name}}</span>
+                            <span>{{mainresdata.activities[1].description}}</span>  
                         </div>
                         
-                        <div>
+                        <div v-if="false">
                             <span>满</span>
                             <span>满22减22，满62减30，满98减39，满128减52，满188减69</span>  
                         </div>
-                        <div>
+                        <div v-if="false">
                             <span>满</span>
                             <span>满22减22，满62减30，满98减39，满128减52，满188减69</span>  
                         </div>
                     </div>
+
                     <div class="activitynum">
-                        <span>活动</span>
+                        <span>{{mainresdata.activities.length}}个活动</span>
+                        <span>▼</span>
                         <img src="" alt="">
                     </div>
 
@@ -94,8 +96,30 @@
 <script>
 
 export default {
+    props:{
+        resdata:Object,
+    },
+    data(){
+        return{
+            mainresdata:this.resdata.restaurant,
+           
+        }
+    },
+    computed:{
+        getimgurl(){
+            let url=this.mainresdata.image_path.split('')
+            url.splice(1,0,'/')
+            url.splice(4,0,'/')
 
-
+            return url
+            // d78ace54115db9b99c505e2b3927f5f8png
+            
+           
+        }
+    },
+    created(){
+    //    console.log(this.getimgurl)
+    }
 
 }
 </script>
@@ -205,9 +229,11 @@ export default {
     margin:0 2px;
     color: #ddd;
 }
-.activity{
+.foodactivity{
     padding-left: 85px;
     margin-top: 10px;
+    flex-direction: column;
+    display: flex;
 }
 .activetop{
     display: flex;
@@ -231,7 +257,31 @@ export default {
     width: 10px;
     height: 10px;
     margin: 3px 4px 0px 4px;
+    position: relative;
 
+}
+.space{
+    height: 13.5px;
+}
+.activitytype{
+    margin-right: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.actop{
+    
+    background-color: rgb(112, 188, 70);
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #ffffff; 
+}
+.reduce{
+    background-color: rgb(240, 115, 115);;
+    border-radius: 3px;
+    padding: 0 2px;
+    color: #ffffff; 
+   
 }
 </style>
 

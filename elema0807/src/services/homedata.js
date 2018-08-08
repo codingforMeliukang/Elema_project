@@ -2,6 +2,7 @@ import axios from 'axios'
 import API from '../api'
 
 
+
 /*
 keyword:请求的关键字
 offset:	位移，默认为0。如果传的是10，那么地址会从第11个开始返回。
@@ -41,6 +42,7 @@ export function getHomeAddressData(addressDataObj){
         .then(response=>{
           
             console.log(response)
+
             let data = response.map(item=>{
             return {
                 name: item.name,               //地名
@@ -84,11 +86,12 @@ export function getHomebannerGoodsData(geo){
     return new Promise((resolve, reject)=>{
         // 请求
         axios.get( API.HOME_BANNER_GOODS_API,{
-         params: {
+
+         params:{
              latitude:geo.latitude,        //纬度
              longitude:geo.longitude,      //经度 
-         }
-        })
+        }})
+
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
         .then(response=>{
         let data = response 
@@ -118,12 +121,19 @@ export function getHomebannerGoodsData(geo){
 export function getHomeRestaurantsData(resobj){
     return new Promise((resolve, reject)=>{
         // 请求
+        // &extras[]=activities
+        // &extras[]=tags
+        // &extra_filters=home&
+        // rank_id=5b756a687cf54c28baa47e0454b24302&terminal=h5
         axios.get( API.HOME_REQUEST_RESTAURANTS_API,{
             params: {
                 latitude:resobj.latitude,        //纬度
                 longitude:resobj.longitude,      //经度 
                 offset:resobj.offset,
                 limit:resobj.limit,
+                'extras[]':'activities',
+                extra_filters:'home',
+                terminal:'h5'
             }
 
         }
@@ -131,12 +141,13 @@ export function getHomeRestaurantsData(resobj){
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
         .then(response=>{
-        //   let data= response.data.items.map(item=>{
-        //       item.restaurant
-        //       console.log(item.restaurant)
-        //   }
-        //   )
+          let data= response.data.items.map(item=>{
+              item.restaurant
+              
+          }
+          )
             resolve( response.data.items);
+
             
         })
         .catch(error=>{

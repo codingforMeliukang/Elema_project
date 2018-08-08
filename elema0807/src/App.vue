@@ -29,7 +29,7 @@ html, body, #app{
 .tabs{
   width: 100%;
   height: 49px;
-  background: palegoldenrod;
+  background: #fff;
   position: absolute;
   left: 0;
   bottom: 0;
