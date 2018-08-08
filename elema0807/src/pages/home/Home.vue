@@ -26,14 +26,14 @@
 <script>
 import Banner from '@/components/home/Banner.vue'
 import Activity from '@/components/home/Activity.vue'
+import Foods from '@/pages/home/Foods.vue'
 export default {
     components:{
         Banner,
-        Activity
-    },
-    data(){
-        
+        Activity,
+        Foods
     }
+    
 }
     
 </script>

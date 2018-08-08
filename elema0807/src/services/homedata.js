@@ -88,11 +88,7 @@ templates[]=favourable_template&templates[]=svip_template&terminal=h5
 export function getHomebannerGoodsData(geo){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_BANNER_GOODS_API,{
-         params:{
-             latitude:geo.latitude,        //纬度
-             longitude:geo.longitude,      //经度 
-        }})
+        axios.get( API.HOME_BANNER_GOODS_API)
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
         .then(response=>{
           
@@ -130,4 +126,22 @@ export function getHomeRestaurantsData(){
             console.log('失败',error);
         })
     })
+    }
+
+    //请求商品头部列表
+
+    export function getHomeTitleList(id){
+        return new Promise((resolve,reject)=>{
+            axios.get(API.HOME_TITLE_LIST_API,{
+                params:{
+                    enrty_id:id
+                }
+            })
+            .then(response=>{
+                resolve(response)
+            })
+            .catch(error=>{
+                console.log('失败',error)
+            })
+        })
     }
