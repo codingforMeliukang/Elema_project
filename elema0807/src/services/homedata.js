@@ -21,8 +21,6 @@ longitude:114.085947         //经度
 name:"深圳市"                
 request_id:"7351173800015270212" 
 short_address:"福田区深圳市"
-
-
 ?keyword=深圳&offset=0&limit=20 ==>配置的参数
 */
 
@@ -85,41 +83,60 @@ templates[]=favourable_template&templates[]=svip_template&terminal=h5
 export function getHomebannerGoodsData(geo){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_BANNER_GOODS_API,
+        axios.get( API.HOME_BANNER_GOODS_API,{
          params: {
              latitude:geo.latitude,        //纬度
              longitude:geo.longitude,      //经度 
+         }
         })
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
         .then(response=>{
-          
-        let data = response
-          
+        let data = response 
         resolve(data);
-            
         })
         .catch(error=>{
             console.log('失败',error);
         })
     })
     }
+
+
+   /* https://h5.ele.me/restapi/shopping/v3/restaurants?latitude=22.54286
+    &longitude=114.059563&offset=0&limit=8&extras[]=activities&
+    extras[]=tags&extra_filters=home&rank_id=&terminal=h5
+    
+    接口参数：
+     latitude:纬度,浮点数据类型
+     longitude:经度,浮点数据类型
+     offset:位移，默认为0。如果传的是8，那么餐厅会从第9个开始返回。
+     limit:餐厅数量，默认为8，如果传的是16，那么会限制只返回16个餐厅。点击选中后,可以获取地址信息,精度维度
+  */  
 
 
 
 //请求餐馆数据列表
-export function getHomeRestaurantsData(){
+export function getHomeRestaurantsData(resobj){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_REQUEST_RESTAURANTS_API
+        axios.get( API.HOME_REQUEST_RESTAURANTS_API,{
+            params: {
+                latitude:resobj.latitude,        //纬度
+                longitude:resobj.longitude,      //经度 
+                offset:resobj.offset,
+                limit:resobj.limit,
+            }
+
+        }
         )
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
         .then(response=>{
-          let data= response.items.map(item=>{
-              item.restaurant
-          }
-          )
-            resolve(data);
+        //   let data= response.data.items.map(item=>{
+        //       item.restaurant
+        //       console.log(item.restaurant)
+        //   }
+        //   )
+            resolve( response.data.items);
             
         })
         .catch(error=>{
@@ -127,3 +144,16 @@ export function getHomeRestaurantsData(){
         })
     })
     }
+
+
+
+
+
+
+
+
+
+
+
+
+

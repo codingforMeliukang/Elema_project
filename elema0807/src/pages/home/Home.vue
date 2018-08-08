@@ -12,7 +12,12 @@
               </div>   
           </div>
           <!-- 首页轮播 -->
-            <Banner></Banner>
+          <Banner></Banner>
+           
+          <goods></goods>
+       
+         
+
 
       </div>
       
@@ -22,13 +27,31 @@
 </template>
 
 <script>
+import {getHomeAddressData,getHomebannerGoodsData,getHomeRestaurantsData} from './../../services/homedata.js'
 import Banner from '@/components/home/Banner.vue'
+import Goods  from  './../../components/foodlist/FoodList.vue' 
 export default {
     components:{
-        Banner
+        Banner,
+        Goods
     },
     data(){
-        
+        return{
+           restaurantsobj:{
+                latitude:22.63336,        //纬度
+                longitude:113.814549,      //经度 
+                offset:0,
+                limit:8,
+           } 
+        }
+    },
+    created(){
+        getHomeRestaurantsData(this.restaurantsobj).then(result=>{
+
+            console.log(result)
+
+        })
+
     }
 }
     
