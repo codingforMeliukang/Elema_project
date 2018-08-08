@@ -22,8 +22,10 @@ request_id:"7351173800015270212"
 short_address:"福田区深圳市"
 */
 
+
 const HOME_REQUEST_ADDRESS_API = '/restapi/bgs/poi/search_poi_nearby_alipay';
 // const HOME_REQUEST_ADDRESS_API = '/restapi/bgs/poi/search_poi_nearby_alipay?keyword=深圳&offset=0&limit=20';
+
 
 
 

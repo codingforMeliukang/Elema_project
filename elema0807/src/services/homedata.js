@@ -2,6 +2,7 @@ import axios from 'axios'
 import API from '../api'
 
 
+
 /*
 keyword:请求的关键字
 offset:	位移，默认为0。如果传的是10，那么地址会从第11个开始返回。
@@ -43,6 +44,7 @@ export function getHomeAddressData(addressDataObj){
         .then(response=>{
           
             console.log(response)
+
             let data = response.map(item=>{
             return {
                 name: item.name,               //地名
@@ -85,11 +87,11 @@ templates[]=favourable_template&templates[]=svip_template&terminal=h5
 export function getHomebannerGoodsData(geo){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_BANNER_GOODS_API,
-         params: {
+        axios.get( API.HOME_BANNER_GOODS_API,{
+         params:{
              latitude:geo.latitude,        //纬度
              longitude:geo.longitude,      //经度 
-        })
+        }})
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
         .then(response=>{
           
@@ -120,6 +122,7 @@ export function getHomeRestaurantsData(){
           }
           )
             resolve(data);
+
             
         })
         .catch(error=>{
