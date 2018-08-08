@@ -1,6 +1,6 @@
 <template>
     <div class="headTop">
-        <div class="locationAddress">
+        <router-link class="locationAddress" to="/home/address">
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-dingwei"></use>
             </svg>
@@ -8,7 +8,7 @@
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-sanjiao"></use>
             </svg>
-        </div> 
+        </router-link> 
     </div>
 </template>
 
@@ -17,11 +17,6 @@ export default {};
 </script>
 
 <style>
-/* .head {
-  height: 85px;
-  background: #0085ff;
-  padding: 10px 14px 0 14px;
-} */
 
 .headTop {
   background-image: linear-gradient(90deg, #0af, #0085ff);
@@ -48,5 +43,6 @@ export default {};
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 900;
+  color: #fff;
 }
 </style>

@@ -10,10 +10,11 @@
 
             <!-- 首页抢购部分  -->
             <Activity></Activity>
-      </div>
-      
-        
+      </div>   
     </div>
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+        <router-view></router-view>
+    </transition>
 </div>
 </template>
 
@@ -29,9 +30,7 @@ export default {
     Search,
     Header
   },
-  data() {
-
-  },
+ 
   methods:{
 
   }

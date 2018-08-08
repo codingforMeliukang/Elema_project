@@ -20,7 +20,6 @@ export default {};
     top: 0px;
     background-image: linear-gradient(90deg,#0af,#0085ff);
     padding: 8px 14px;
-    z-index: 9;
 }
 .headSearch {
   display: -webkit-box;

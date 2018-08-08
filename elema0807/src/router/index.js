@@ -8,13 +8,21 @@ import Discover from '@/pages/discover/Discover.vue'
 import Order from '@/pages/order/Order.vue'
 import Mine from '@/pages/mine/Mine.vue'
 import Login from '@/pages/mine/Login.vue'
+import Address from '@/pages/home/Address.vue'
 
 // 配置
 const routes = [
   {
     path: '/home',
     name: 'page1',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: 'address',
+        name: 'address',
+        component: Address
+      }
+    ]
   },
   {
     path: '/discover',
