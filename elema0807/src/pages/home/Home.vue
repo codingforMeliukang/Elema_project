@@ -46,7 +46,7 @@ export default {
         }
     },
     created(){
-        getHomeRestaurantsData(this.restaurantsobj).then(result=>{
+        getHomebannerGoodsData(this.restaurantsobj).then(result=>{
 
             console.log(result)
 
