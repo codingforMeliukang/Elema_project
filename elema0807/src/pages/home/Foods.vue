@@ -71,13 +71,11 @@ export default {
         }
         
     },
-    created(){
+    mounted(){
+        console.log(this.$center)
         this.$center.$on('idData',(data)=>{
-            // console.log('------')
-            // console.log(data)
-            this.id = data,
-            console.log(this.id)
-            console.log('------')
+            console.log('接收数据成功')
+            console.log(data)  
         });
         getHomeTitleList(this.idRequestData).then(result=>{
             console.log(result)

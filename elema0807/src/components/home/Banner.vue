@@ -24,6 +24,7 @@ import {getHomebannerGoodsData} from '../../services/homedata.js'
 export default {
     data(){
         return{
+            id:'',
             pageList:{},
             bannerdata:{
                   latitude:22.4,        //纬度
@@ -37,12 +38,11 @@ export default {
     },
     methods:{
         changePage(index){
-            let id = this.swiperArrOne[index].id
-            console.log(id)
-            console.log(index)
-            this.$router.push({name:'foods',path:'/foods'})
-            
-            this.$center.$emit('idData',id)
+            let idNow = this.swiperArrOne[index].id
+            this.id = idNow,
+            console.log(this.id+'成功')
+            this.$center.$emit('idData',this.id)
+            this.$router.push({name:'foods',path:'/foods'})  
         }
     },
 
