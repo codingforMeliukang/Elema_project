@@ -1,16 +1,10 @@
 <template>
 <div>
-    <div id="home" class="page">  
-      <div class="warp">
+    <div id="home">  
+        <div class="warp">
           <!--首页头部 -->
-          <div class="head">
-              <div class="headTop">
-                  <span></span><span>深圳西部硅谷</span><span>↓</span>
-              </div>
-              <div class="headInp">
-                  <input type="text" placeholder="搜索饿了么商家、商品名称">
-              </div>   
-          </div>
+            <Header></Header>
+            <Search></Search>
           <!-- 首页轮播 -->
             <Banner></Banner>
 
@@ -26,38 +20,39 @@
       
         
     </div>
+    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
+        <router-view></router-view>
+    </transition>
 </div>
 </template>
 
 <script>
+
 import Banner from '@/components/home/Banner.vue'
 import Activity from '@/components/home/Activity.vue'
 import Nav from '@/components/home/Nav.vue'
 import Foods from '@/pages/home/Foods.vue'
+import Search from "@/components/home/Search.vue";
+import Header from "@/components/home/Header.vue";
 export default {
     components:{
         Banner,
         Activity,
         Nav,
-        Foods
+        Foods,
+        Search,
+        Header
     }
     
 }
     
+
+
 </script>
 
-<style scoped>
-    .head{
-        
-        height: 90px;
-        background: #0085ff;
-        padding: 10px 10px 0 10px;
-    }
+<style>
 
-    .headTop{
-        color: #fff;
-        margin-bottom: 10px;
-    }
+
 
     .headInp input{
         width: 100%;
@@ -74,4 +69,5 @@ export default {
         color: #000;
         font-size: 14px
     }
+
 </style>

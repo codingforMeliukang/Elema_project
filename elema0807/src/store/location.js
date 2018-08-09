@@ -1,27 +1,33 @@
 const state = {
-    longtitude: 114,
-    latitude: 23
-}
-
-const getters = {
-
+    locValue: {
+		longitude: null,
+		latitude: null
+	}
 }
 
 const mutations = {
-    modifyUsername(state, params){
-        console.log('location mutations 触发了');
-    }
+    modifyLocation(state, params){
+		state.locValue = params;
+	}
 }
 
 const actions = {
-    reName(){
-        console.log('location actions 触发了');
-    }
+    getLocation(context){
+		setTimeout(()=>{
+			context.commit('modifyLocation', {
+				longitude: '113.837884',
+				latitude: '22.626024'
+			})
+		}, 2000);
+	},
+    userSelectLocation(context, params){
+		context.commit('modifyLocation', params);
+	}
 }
 
 export default {
+    namespaced: true,
     state,
-    getters,
     mutations,
     actions
 }
