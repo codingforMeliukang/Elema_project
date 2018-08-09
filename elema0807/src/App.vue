@@ -25,12 +25,13 @@ export default {
 html, body, #app{
   width: 100%;
   height: 100%;
+  /* position: relative; */
 }
 .tabs{
   width: 100%;
   height: 49px;
   background: #fff;
-  position: absolute;
+  position: fixed;
   left: 0;
   bottom: 0;
   display: flex;
