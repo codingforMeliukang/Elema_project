@@ -80,10 +80,10 @@ export default {
     methods:{
         changePage(id){
 
-            console.log(id)
+            // console.log(id)
             this.$router.push({name:'foods',path:'/foods'})
             console.log(this.$center)
-            this.$center.$emit('idData','nihao')
+            this.$center.$emit('idData',id)
         }
     },
 

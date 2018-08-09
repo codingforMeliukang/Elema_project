@@ -34,7 +34,7 @@ short_address:"福田区深圳市"
 export function getHomeAddressData(addressDataObj){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_REQUEST_ADDRESS_API,{
+        axios.get(API.HOME_REQUEST_ADDRESS_API,{
          params: {
             keyword:addressDataObj.keyword,
             offset:addressDataObj.offset,
@@ -130,11 +130,13 @@ export function getHomeRestaurantsData(){
 
     //请求商品头部列表
 
-    export function getHomeTitleList(id){
+    export function getHomeTitleList(params){
         return new Promise((resolve,reject)=>{
             axios.get(API.HOME_TITLE_LIST_API,{
                 params:{
-                    enrty_id:id
+                    entry_id:params.entry_id,
+                    longitude:params.longitude,
+                    latitude:params.latitude
                 }
             })
             .then(response=>{
