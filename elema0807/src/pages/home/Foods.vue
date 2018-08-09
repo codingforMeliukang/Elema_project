@@ -48,12 +48,17 @@
                 </ul>
             </div>
         </div>
+        <Nav></Nav>
     </div>
 </template>
 
 <script>
+import Nav from '@/components/home/Nav.vue'
 import {getHomeTitleList} from '../../services/homedata.js'
 export default {
+    components:{
+        Nav
+    },
     data(){
         return{
             id:'',

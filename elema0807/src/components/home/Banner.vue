@@ -3,7 +3,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <li v-for="(item,index) in swiperArrOne" :key='index'
-                @click="changePage(item.id)">
+                @click="changePage(index)">
                     <img :src='swiperData[index].url'>
                     <span>{{swiperArrOne[index].name}}</span>
                 </li>
@@ -71,18 +71,19 @@ export default {
                   latitude:22.4,        //纬度
                   longitude:112.4, 
             },
-            
+            swiperArr:[],
             swiperArrOne:[],
             swiperArrTwo:[],
         }
         
     },
     methods:{
-        changePage(id){
-
-            // console.log(id)
+        changePage(index){
+            let id = this.swiperArrOne[index].id
+            console.log(id)
+            console.log(index)
             this.$router.push({name:'foods',path:'/foods'})
-            console.log(this.$center)
+            
             this.$center.$emit('idData',id)
         }
     },
@@ -100,6 +101,7 @@ export default {
             // console.log(this.pageList.data[1])
             var swiperArr = this.pageList.data[0].entries
             
+            console.log(swiperArr)
 
             var swiperArrOne = [];
             var swiperArrTwo = [];
