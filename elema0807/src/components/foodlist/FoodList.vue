@@ -80,7 +80,7 @@
                     <div class="activitynum" v-if="mainresdata.activities.length>0" @click="showActy()">
                         <span >{{mainresdata.activities.length}}个活动</span>
                         <!-- <span class="triangel" ref="triangle">▼</span> -->
-                        <span class="triangel" ref="triangle">\</span>
+                        <span class="triangel" ref="triangle">|</span>
 
                 
                     </div>
@@ -111,7 +111,7 @@ export default {
             if(this.activitynum==2&&this.mainresdata.activities.length>2){
                 this.activitynum=this.mainresdata.activities.length+1;
                 console.log(this.$refs.triangle)
-                this.$refs.triangle.className='up';
+                this.$refs.triangle.className='triangel up';
                 this.$center.$emit('refreshDom')
                 
             }
@@ -338,15 +338,15 @@ export default {
     margin-right: 4px;
 }
 .triangel{
-   transform: rotate(90deg);
-   /* transition: transform 1s ease-in-out; */
+   transition: transform 1s;
+   font-size: 12px;
+   
 }
-.up{
+.triangel.up{
+
     transform: rotate(180deg);
+    font-size: 20px;
 }
-.triangel:hover{
-    /* font-size: 20px; */
-    /* transform: rotate(0deg); */
-}
+
 </style>
 
