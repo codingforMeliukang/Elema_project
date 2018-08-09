@@ -51,7 +51,7 @@ name:"美食"
 name_color:""
 position:1
 */
-const HOME_BANNER_GOODS_API = '/restapi/shopping/openapi/entries';
+const HOME_BANNER_GOODS_API = '/restapi/shopping/openapi/entries?latitude=22.547&longitude=114.085947&templates[]=main_template&templates[]=favourable_template&templates[]=svip_template&terminal=h5';
 
 
 /*
@@ -114,6 +114,17 @@ type:0
 const HOME_REQUEST_RESTAURANTS_API = '/restapi/shopping/v3/restaurants';
 
 
+
+
+
+
+
+
+
+const HOME_TITLE_LIST_API = '/restapi/shopping/v2/foods_page/sift_factors'
+
+// [{"id":163089,"name":"全部","restaurant_category_ids":[209,212,213,214,215,216,217,219,265,266,267,268,269,221,222,223,224,225,226,227,228,231,232,263,218,234,235,236,237,238,211,229,230,264]},{"id":163105,"name":"简餐便当","restaurant_category_ids":[209,265]},{"id":163145,"name":"小吃炸串","restaurant_category_ids":[234,235,236,237]},{"id":163097,"name":"面食粥点","restaurant_category_ids":[216,213,215]},{"id":163153,"name":"地方菜系","restaurant_category_ids":[224,225,226,227,228,221,222,223]},{"id":163121,"name":"香锅冒菜","restaurant_category_ids":[219,214]},{"id":163129,"name":"日韩料理","restaurant_category_ids":[229]},{"id":163113,"name":"汉堡披萨","restaurant_category_ids":[211,212]},{"id":163137,"name":"轻食西餐","restaurant_category_ids":[230]}]
+
 /*
 首页头部定位当前的位置
 参数：
@@ -124,9 +135,11 @@ const HOME_REQUEST_RESTAURANTS_API = '/restapi/shopping/v3/restaurants';
 const HOME_HEADER_ADRESS_API = '/restapi/bgs/poi/reverse_geo_coding';
 
 
+
 export default {
     HOME_REQUEST_ADDRESS_API,
     HOME_REQUEST_RESTAURANTS_API,
     HOME_BANNER_GOODS_API,
-    HOME_HEADER_ADRESS_API
+    HOME_HEADER_ADRESS_API,
+    HOME_TITLE_LIST_API
 }

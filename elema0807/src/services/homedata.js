@@ -22,8 +22,6 @@ longitude:114.085947         //经度
 name:"深圳市"                
 request_id:"7351173800015270212" 
 short_address:"福田区深圳市"
-
-
 ?keyword=深圳&offset=0&limit=20 ==>配置的参数
 */
 
@@ -31,6 +29,7 @@ short_address:"福田区深圳市"
 
 
 //请求地址数据
+
 export function getHomeAddressData(keyword, latitude, longitude, limit) {
   return new Promise((resolve, reject) => {
     // 请求
@@ -40,6 +39,7 @@ export function getHomeAddressData(keyword, latitude, longitude, limit) {
           limit: limit,
           latitude: latitude,
           longitude: longitude
+
         }
       })
       .then(response => {
@@ -85,18 +85,14 @@ templates[]=favourable_template&templates[]=svip_template&terminal=h5
 */
 
 //请求轮播图商品数据,限量抢购数据
-export function getHomebannerGoodsData(geo) {
-  return new Promise((resolve, reject) => {
-    // 请求
-    axios.get(API.HOME_BANNER_GOODS_API, {
-        params: {
-          latitude: geo.latitude, //纬度
-          longitude: geo.longitude, //经度 
-        }
-      })
-      //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
-      .then(response => {
 
+export function getHomebannerGoodsData(geo){
+    return new Promise((resolve, reject)=>{
+        // 请求
+        axios.get( API.HOME_BANNER_GOODS_API)
+//图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
+        .then(response=>{
+          
         let data = response
 
         resolve(data);
@@ -111,40 +107,112 @@ export function getHomebannerGoodsData(geo) {
 
 
 //请求餐馆数据列表
-export function getHomeRestaurantsData() {
-  return new Promise((resolve, reject) => {
-    // 请求
-    axios.get(API.HOME_REQUEST_RESTAURANTS_API)
-      //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
+// export function getHomeRestaurantsData() {
+//   return new Promise((resolve, reject) => {
+//     // 请求
+//     axios.get(API.HOME_REQUEST_RESTAURANTS_API)
+//       //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
-      .then(response => {
-        let data = response.items.map(item => {
-          item.restaurant
+//       .then(response => {
+//         let data = response.items.map(item => {
+//           item.restaurant
+//         })
+//         resolve(data);
+
+
+//       })
+//       .catch(error => {
+//         console.log('失败', error);
+//       })
+
+//     })
+//     }
+
+    //请求商品头部列表
+
+    export function getHomeTitleList(params){
+        return new Promise((resolve,reject)=>{
+            axios.get(API.HOME_TITLE_LIST_API,{
+                params:{
+                    entry_id:params.entry_id,
+                    longitude:params.longitude,
+                    latitude:params.latitude
+                }
+            })
+            .then(response=>{
+                resolve(response)
+            })
+            .catch(error=>{
+                console.log('失败',error)
+            })
         })
-        resolve(data);
+    }
+
+        
+
+   /* https://h5.ele.me/restapi/shopping/v3/restaurants?latitude=22.54286
+    &longitude=114.059563&offset=0&limit=8&extras[]=activities&
+    extras[]=tags&extra_filters=home&rank_id=&terminal=h5
+    
+    接口参数：
+     latitude:纬度,浮点数据类型
+     longitude:经度,浮点数据类型
+     offset:位移，默认为0。如果传的是8，那么餐厅会从第9个开始返回。
+     limit:餐厅数量，默认为8，如果传的是16，那么会限制只返回16个餐厅。点击选中后,可以获取地址信息,精度维度
+  */  
 
 
-      })
-      .catch(error => {
-        console.log('失败', error);
-      })
-  })
-}
 
-//请求首页头部当前的具体位置信息
-export function getAddressInfo(latitude, longitude) {
-  return new Promise((resolve, reject) => {
-    axios.get(API.HOME_HEADER_ADRESS_API, {
-        params: {
-          latitude: latitude,
-          longitude: longitude
+//请求餐馆数据列表
+export function getHomeRestaurantsData(resobj){
+    return new Promise((resolve, reject)=>{
+        // 请求
+        // &extras[]=activities
+        // &extras[]=tags
+        // &extra_filters=home&
+        // rank_id=5b756a687cf54c28baa47e0454b24302&terminal=h5
+        axios.get( API.HOME_REQUEST_RESTAURANTS_API,{
+            params: {
+                latitude:resobj.latitude,        //纬度
+                longitude:resobj.longitude,      //经度 
+                offset:resobj.offset,
+                limit:resobj.limit,
+                'extras[]':'activities',
+                extra_filters:'home',
+                terminal:'h5'
+            }
+
         }
-      })
-      .then(response => {
-        resolve(response.data.name);
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  })
+        )
+//图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
+
+        .then(response=>{
+          let data= response.data.items.map(item=>{
+              item.restaurant
+              
+          }
+          )
+            resolve( response.data.items);
+
+        })
+        .catch(error=>{
+            console.log('失败')
+        })
+    })
+}
+export function getAddressInfo(latitude, longitude) {
+    return new Promise((resolve, reject) => {
+      axios.get(API.HOME_HEADER_ADRESS_API, {
+          params: {
+            latitude: latitude,
+            longitude: longitude
+          }
+        })
+        .then(response => {
+          resolve(response.data.name);
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    })
 }

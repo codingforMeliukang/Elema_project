@@ -7,6 +7,7 @@ import Home from '@/pages/home/Home.vue'
 import Discover from '@/pages/discover/Discover.vue'
 import Order from '@/pages/order/Order.vue'
 import Mine from '@/pages/mine/Mine.vue'
+import Foods from '@/pages/home/Foods.vue'
 import Login from '@/pages/mine/Login.vue'
 import Address from '@/pages/home/Address.vue'
 
@@ -23,6 +24,11 @@ const routes = [
         component: Address
       }
     ]
+  },
+  {
+    path:'/foods',
+    name:'foods',
+    component:Foods
   },
   {
     path: '/discover',
