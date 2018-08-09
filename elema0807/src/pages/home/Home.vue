@@ -1,28 +1,30 @@
 <template>
-<div>
-    <div id="home" class="page">  
-      <div class="warp">
-          <!--首页头部 -->
-          <div class="head">
-              <div class="headTop">
-                  <span></span><span>深圳西部硅谷</span><span>↓</span>
-              </div>
-              <div class="headInp">
-                  <input type="text" placeholder="搜索饿了么商家、商品名称">
-              </div>   
-          </div>
-          <!-- 首页轮播 -->
-          <Banner></Banner>
-        
+<page ref="foods">
+    <div>
+     
+        <div class="warp">
+            <!--首页头部 -->
+            <div class="head">
+                <div class="headTop">
+                    <span></span><span>深圳西部硅谷</span><span>↓</span>
+                </div>
+                <div class="headInp">
+                    <input type="text" placeholder="搜索饿了么商家、商品名称">
+                </div>   
+            </div>
+            <!-- 首页轮播 -->
+            <Banner></Banner>
+            
             <!-- 首页抢购部分  -->
-            <Activity></Activity>
-          <!-- 餐馆列表  -->
-            <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"></food-list>
-      </div>
-      
+                <Activity></Activity>
+            <!-- 餐馆列表  -->
+                <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
+        </div>
         
+            
     </div>
-</div>
+</page>
+
 </template>
 
 <script>
@@ -31,11 +33,13 @@ import Banner from '@/components/home/Banner.vue'
 
 import FoodList  from  './../../components/foodlist/FoodList.vue' 
 import Activity from '@/components/home/Activity.vue'
+import Page from '@/components/page/Page.vue'
 export default {
     components:{
         Banner,
         FoodList,
-        Activity
+        Activity,
+        Page
 },
     data(){
         return{
@@ -49,6 +53,10 @@ export default {
             restaurantsData:[]
         }
     },
+    methods:{
+       
+       
+    },
     created(){
         getHomeRestaurantsData(this.restaurantsobj).then(result=>{
             this.restaurantsData=result
@@ -56,7 +64,18 @@ export default {
 
         })
 
-    }
+    },
+    mounted(){
+                 
+            this.$center.$on('refreshDom',()=>{
+                 console.log('更新dom')
+            this.$nextTick(()=>{
+                this.$refs.foods.refreshDOM();
+            })
+        })
+       }
+       
+  
 }
     
 </script>

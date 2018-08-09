@@ -4,7 +4,7 @@
             <div class="foodsinfo">
                 <div class="foodlogo">
                     <div class="logomain">
-                        <img src="//fuss10.elemecdn.com/1/98/c12da153a993422c7e57c16668c0dpng.png?imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/" alt="">
+                        <img :src="mainresdata.image_path|formatimg" alt="">
                     </div>
                 </div>
 
@@ -13,7 +13,9 @@
                     <section class="foodsamestyle">
                         <h3 class="shopname">{{mainresdata.name}}</h3>
                         <ul class="saveticket">
-                            <li v-for="(item,index) in mainresdata.supports" :key="index">{{item.icon_name}}</li>
+                            <li v-for="(item,index) in mainresdata.supports" :key="index">
+                                <span v-if="item.icon_name">{{item.icon_name}}</span>
+                            </li>
 
                     
                         </ul>
@@ -60,29 +62,17 @@
                 <div class="space"></div>
                 <section class="activetop">
                     <div class="activitytype">
-                        <div>
-                            <span class="actop">{{mainresdata.activities[0].icon_name}}</span>
-                            <span>{{mainresdata.activities[0].description}}</span>  
-                        </div>
-                        <div>
-                            <span class="reduce">{{mainresdata.activities[1].icon_name}}</span>
-                            <span>{{mainresdata.activities[1].description}}</span>  
-                        </div>
-                        
-                        <div v-if="false">
-                            <span>满</span>
-                            <span>满22减22，满62减30，满98减39，满128减52，满188减69</span>  
-                        </div>
-                        <div v-if="false">
-                            <span>满</span>
-                            <span>满22减22，满62减30，满98减39，满128减52，满188减69</span>  
+
+                        <div v-for="(item,index) in mainresdata.activities" :key="index" v-if="index<activitynum">
+                            <span class="actop" :style="{ background:'#'+item.icon_color }">{{item.icon_name}}</span>
+                            <span>{{item.description}}</span>  
                         </div>
                     </div>
 
-                    <div class="activitynum">
-                        <span>{{mainresdata.activities.length}}个活动</span>
+                    <div class="activitynum" v-if="mainresdata.activities.length>0" @click="showActy()">
+                        <span >{{mainresdata.activities.length}}个活动</span>
                         <span>▼</span>
-                        <img src="" alt="">
+                
                     </div>
 
                 </section>
@@ -102,23 +92,25 @@ export default {
     data(){
         return{
             mainresdata:this.resdata.restaurant,
-           
+            activitynum:2,
         }
     },
-    computed:{
-        getimgurl(){
-            let url=this.mainresdata.image_path.split('')
-            url.splice(1,0,'/')
-            url.splice(4,0,'/')
+    methods:{
+        showActy(){
+            if(this.activitynum==2){
+                this.activitynum=this.mainresdata.activities.length+1
+            }
+            else if(this.activitynum==this.mainresdata.activities.length+1){
+                this.activitynum=2
+            }
 
-            return url
-            // d78ace54115db9b99c505e2b3927f5f8png
-            
-           
+            this.$center.$emit('refreshDom')
+            console.log(this.$center)
+         
         }
     },
     created(){
-    //    console.log(this.getimgurl)
+   
     }
 
 }
@@ -221,6 +213,7 @@ export default {
     background: #0098ff;
     color: #ffffff;
     text-align: center;
+   
 }
 .distantime{
     color: #ddd;
@@ -237,7 +230,8 @@ export default {
 }
 .activetop{
     display: flex;
-   
+    overflow: hidden;
+    
 }
 .foodstype{
     color: rgb(102, 102, 102);
@@ -268,10 +262,26 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    flex: 1;
+}
+.activitytype div{
+    margin-right: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+     overflow: hidden;
+    width: 100%;
+    display: flex;
+    margin: 4px 0px;
+}
+.activitytype div span:nth-child(2){
+    margin-right: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    flex: 1;
+    margin-left: 4px;
 }
 .actop{
-    
-    background-color: rgb(112, 188, 70);
     border-radius: 3px;
     padding: 0 2px;
     color: #ffffff; 
@@ -282,6 +292,9 @@ export default {
     padding: 0 2px;
     color: #ffffff; 
    
+}
+.activitynum{
+    margin-right: 4px;
 }
 </style>
 
