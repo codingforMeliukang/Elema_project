@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div id="home" class="page">  
+    <div id="home">  
         <div class="warp">
           <!--首页头部 -->
             <Header></Header>

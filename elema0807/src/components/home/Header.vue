@@ -4,7 +4,7 @@
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-dingwei"></use>
             </svg>
-            <span class="address">禧福阁深圳西部硅谷</span>
+            <span class="address">{{address}}</span>
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-sanjiao"></use>
             </svg>
@@ -13,7 +13,38 @@
 </template>
 
 <script>
-export default {};
+import { getAddressInfo } from '../../services/homedata.js'
+import Vuex from 'vuex'
+export default {
+   data(){
+		return {
+			address: ''
+		}
+	},
+	computed: {
+		...Vuex.mapState({
+			location: state=>state.location.locValue
+		})
+	},
+	methods: {
+		getData(){
+			let {longitude, latitude} = this.location;
+			getAddressInfo(latitude, longitude)
+			.then(result=>{
+				this.address = result;
+			})
+		}
+	},
+	watch: {
+		location: {
+			handler(){
+				console.log('请求了');
+				this.getData();
+			},
+			deep: true
+		}
+	} 
+};
 </script>
 
 <style>

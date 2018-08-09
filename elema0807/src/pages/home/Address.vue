@@ -17,19 +17,59 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fangdajing"></use>
                 </svg>
-                <input type="search" placeholder="请输入地址" class="index-2V7cn_0">
+                <input type="search" placeholder="请输入地址" class="index-2V7cn_0" v-model="value" @keyup.enter="searchAction()">
             </div>
         </div>
+        <ul>
+            <li class="addressList" v-for="(address,index) in addressList" :key="index" @click="selectAction(address)">
+                <p>{{address.name}}</p>
+				<p>{{address.address}}</p>
+                <span>{{address.distance}}</span>
+            </li>
+        </ul>
     </div>
 </template>
 
 <script>
+import { getHomeAddressData } from '../../services/homedata.js'
+import Vuex from 'vuex'
 export default {
+    data(){
+        return{
+            value: '',
+            addressList: []
+        }
+    },
+    computed: {
+		...Vuex.mapState({
+			location: state=>state.location.locValue
+		})
+	},
     methods:{
+        ...Vuex.mapActions({
+			userSelectLocation: 'location/userSelectLocation'
+        }),
+        searchAction(){
+            let {longitude, latitude} = this.location;
+			getHomeAddressData(this.value, latitude, longitude, 20)
+			.then(result=>{
+				console.log(result);
+				this.addressList = result;
+			})
+        },
+        selectAction(address){
+			console.log(address);	
+			this.userSelectLocation({
+				longitude: address.longitude,
+				latitude: address.latitude
+			});
+			this.$router.back();
+		},
         backAction(){
             this.$router.back();
         }
-    }
+    },
+    
 }
 </script>
 

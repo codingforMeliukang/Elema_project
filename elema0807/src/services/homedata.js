@@ -31,39 +31,40 @@ short_address:"福田区深圳市"
 
 
 //请求地址数据
-export function getHomeAddressData(addressDataObj){
-    return new Promise((resolve, reject)=>{
-        // 请求
-        axios.get( API.HOME_REQUEST_ADDRESS_API,{
-         params: {
-            keyword:addressDataObj.keyword,
-            offset:addressDataObj.offset,
-            limit:addressDataObj.limit,
+export function getHomeAddressData(keyword, latitude, longitude, limit) {
+  return new Promise((resolve, reject) => {
+    // 请求
+    axios.get(API.HOME_REQUEST_ADDRESS_API, {
+        params: {
+          keyword: keyword,
+          limit: limit,
+          latitude: latitude,
+          longitude: longitude
         }
 
-        })
-        .then(response=>{
-          
-            console.log(response)
+      })
+      .then(response => {
 
-            let data = response.map(item=>{
-            return {
-                name: item.name,               //地名
-                address: item.address,         //地址
-                distance: item.distance,       //距离
-                id:item.city_id,               //城市id
-                latitude:item.latitude,        //纬度
-                longitude:itme.longitude,      //经度 
-            }
+        console.log(response)
+
+        let newData = response.data.map(item => {
+          return {
+            name: item.name, //地名
+            address: item.address, //地址
+            distance: item.distance, //距离
+            id: item.city_id, //城市id
+            latitude: item.latitude, //纬度
+            longitude: item.longitude //经度 
+          }
         });
-            resolve(data);
-            
-        })
-        .catch(error=>{
-            console.log('失败',error);
-        })
-    })
-    }
+        resolve(newData);
+
+      })
+      .catch(error => {
+        console.log('失败', error);
+      })
+  })
+}
 
 /*
 请求得来数据参数:
@@ -85,49 +86,66 @@ templates[]=favourable_template&templates[]=svip_template&terminal=h5
 */
 
 //请求轮播图商品数据,限量抢购数据
-export function getHomebannerGoodsData(geo){
-    return new Promise((resolve, reject)=>{
-        // 请求
-        axios.get( API.HOME_BANNER_GOODS_API,{
-         params:{
-             latitude:geo.latitude,        //纬度
-             longitude:geo.longitude,      //经度 
-        }})
-//图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
-        .then(response=>{
-          
+export function getHomebannerGoodsData(geo) {
+  return new Promise((resolve, reject) => {
+    // 请求
+    axios.get(API.HOME_BANNER_GOODS_API, {
+        params: {
+          latitude: geo.latitude, //纬度
+          longitude: geo.longitude, //经度 
+        }
+      })
+      //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
+      .then(response => {
+
         let data = response
-          
+
         resolve(data);
-            
-        })
-        .catch(error=>{
-            console.log('失败',error);
-        })
-    })
-    }
+
+      })
+      .catch(error => {
+        console.log('失败', error);
+      })
+  })
+}
 
 
 
 //请求餐馆数据列表
-export function getHomeRestaurantsData(){
-    return new Promise((resolve, reject)=>{
-        // 请求
-        axios.get( API.HOME_REQUEST_RESTAURANTS_API
-        )
-//图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
+export function getHomeRestaurantsData() {
+  return new Promise((resolve, reject) => {
+    // 请求
+    axios.get(API.HOME_REQUEST_RESTAURANTS_API)
+      //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
-        .then(response=>{
-          let data= response.items.map(item=>{
-              item.restaurant
-          }
-          )
-            resolve(data);
+      .then(response => {
+        let data = response.items.map(item => {
+          item.restaurant
+        })
+        resolve(data);
 
-            
-        })
-        .catch(error=>{
-            console.log('失败',error);
-        })
-    })
-    }
+
+      })
+      .catch(error => {
+        console.log('失败', error);
+      })
+  })
+}
+
+//请求首页头部当前的具体位置信息
+export function getAddressInfo(latitude, longitude) {
+  return new Promise((resolve, reject) => {
+    axios.get(API.HOME_HEADER_ADRESS_API, {
+        params: {
+          latitude: latitude,
+          longitude: longitude
+        }
+      })
+      .then(response => {
+        resolve(response.data.name);
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  })
+}

@@ -114,8 +114,19 @@ type:0
 const HOME_REQUEST_RESTAURANTS_API = '/restapi/shopping/v3/restaurants';
 
 
+/*
+首页头部定位当前的位置
+参数：
+	latitude：经度
+	longitude：纬度
+ */
+
+const HOME_HEADER_ADRESS_API = '/restapi/bgs/poi/reverse_geo_coding';
+
+
 export default {
     HOME_REQUEST_ADDRESS_API,
     HOME_REQUEST_RESTAURANTS_API,
     HOME_BANNER_GOODS_API,
+    HOME_HEADER_ADRESS_API
 }

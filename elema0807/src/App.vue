@@ -36,8 +36,17 @@
 </template>
 
 <script>
+import Vuex from 'vuex'
 export default {
-  name: "App"
+  name: "App",
+  methods: {
+  	...Vuex.mapActions({
+  		getLocation: 'location/getLocation'
+  	})
+  },
+  created(){
+  	this.getLocation();
+  }
 };
 </script>
 
