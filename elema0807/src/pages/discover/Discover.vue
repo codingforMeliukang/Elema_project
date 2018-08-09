@@ -41,6 +41,61 @@
                 限时好礼
                 <span class="line right"></span>
             </div>
+            <p class="activity-sub-title">金币换豪礼</p>
+            <div class="activity-body">
+                <a href="javascript:;" class="discover-food">
+                    <img src="https://fuss10.elemecdn.com/c/66/89cc6ef54261bbd98b94deeff2546jpeg.jpeg?imageMogr/format/webp/">
+                    <div>
+                        <p class="food-name ui-ellipsis">3元饿了么红包</p>
+                        <div food-info clearfix>
+                            <div class="food-price">
+                                <span class="price ui-ellipsis">
+                                    <span>90金币</span>
+                                </span>
+                                <del class="original-price ui-ellipsis">¥3</del>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="discount">限时优惠</span>
+                </a>
+                <a href="javascript:;" class="discover-food">
+                    <img src="https://fuss10.elemecdn.com/5/78/5c1ca7ceca079926933ca418c9eb7jpeg.jpeg?imageMogr/format/webp/">
+                    <div>
+                        <p class="food-name ui-ellipsis">扫地机器人</p>
+                        <div food-info clearfix>
+                            <div class="food-price">
+                                <span class="price ui-ellipsis">
+                                    <span>9金币</span>
+                                </span>
+                                <del class="original-price ui-ellipsis">¥99</del>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="discount">特价换购</span>
+                </a>
+                <a href="javascript:;" class="discover-food">
+                    <img src="https://fuss10.elemecdn.com/0/d8/de4c1115cad90787fd3a64c897e5djpeg.jpeg?imageMogr/format/webp/">
+                    <div>
+                        <p class="food-name ui-ellipsis">黑胶晴雨伞</p>
+                        <div food-info clearfix>
+                            <div class="food-price">
+                                <span class="price ui-ellipsis">
+                                    <span>9金币</span>
+                                </span>
+                                <del class="original-price ui-ellipsis">¥109</del>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="discount">特价换购</span>
+                </a>
+            
+            </div>
+            <p class="activity-more">
+                查看更多
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-youjiantou-copy-copy"></use>
+                </svg>
+            </p>        
         </div>
     </div>
 </template>
@@ -138,7 +193,7 @@ export default {};
 .activity-header{
     padding-top: 20px;
     text-align: center;
-    font-size: .48rem;
+    font-size: 18px;
     font-weight: 700;
     color: #333;
 }
@@ -167,5 +222,104 @@ export default {};
     width: .133333rem;
     width: 1.333333vw;
     border-radius: 50%;
+}
+.line.right:after {
+    left: -.066667rem;
+    left: -.666667vw;
+}
+.activity-header svg{
+    width: 17px;
+    height: 17px;
+}
+.activity-sub-title {
+    font-size: .293333rem;
+    color: #999;
+    text-align: center;
+    padding-bottom: .213333rem;
+}
+.activity-body{
+    padding: .32rem 0 .4rem .4rem;
+    padding: 3.2vw 0 4vw 4vw;
+    white-space: nowrap;
+}
+.discover-food {
+    display: inline-block;
+    position: relative;
+    box-sizing: border-box;
+    width: 2.96rem;
+    width: 29.6vw;
+    margin-right: .16rem;
+    margin-right: 1.6vw;
+}
+.discover-food img {
+    width: 4.32rem;
+    width: 43.2vw;
+    height: 2.933333rem;
+    height: 29.333333vw;
+    margin-bottom: .253333rem;
+    margin-bottom: 2.533333vw;
+    max-width: 100%;
+}
+.discover-food .food-name {
+    font-size: .346667rem;
+    color: #333;
+    margin-bottom: .133333rem;
+    margin-bottom: 1.333333vw;
+}
+.ui-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.discover-food .food-price {
+    height: .64rem;
+    height: 6.4vw;
+    line-height: .64rem;
+    line-height: 6.4vw;
+}
+.discover-food .price {
+    font-size: .346667rem;
+    height: .48rem;
+    height: 4.8vw;
+    line-height: .48rem;
+    line-height: 4.8vw;
+    color: #ff5339;
+    margin-right: .093333rem;
+    margin-right: .933333vw;
+    max-width: 1.333333rem;
+    max-width: 13.333333vw;
+    display: inline-block;
+    vertical-align: middle;
+}
+.discover-food .original-price {
+    font-size: .293333rem;
+    color: #aaa;
+    max-width: 1.066667rem;
+    max-width: 10.666667vw;
+    display: inline-block;
+    vertical-align: middle;
+}
+.discover-food .discount {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: .293333rem;
+    color: #fff;
+    background: #413d3c;
+    padding: .066667rem;
+    padding: .666667vw;
+}
+.activity-more {
+    font-size: .346667rem;
+    color: #999;
+    text-align: center;
+    padding: .4rem 0 .48rem;
+    padding: 4vw 0 4.8vw;
+}
+.activity-more svg{
+    width: 7px;
+    height: 10px;
+    margin-left: 5px;
+    margin-bottom: 2px;
 }
 </style>
