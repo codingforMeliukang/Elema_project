@@ -141,7 +141,6 @@ export function getHomeRestaurantsData(resobj){
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
         .then(response=>{
-            console.log(response)
           let data= response.data.items.map(item=>{
               item.restaurant
               
