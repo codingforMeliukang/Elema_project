@@ -114,11 +114,13 @@ export default {
         rankAction(){
             this.rankAllData = !this.rankAllData;
             this.filtAllData = false;
+            console.log(1111)
         },
 
         filtAction(){
             this.filtAllData = !this.filtAllData;
             this.rankAllData = false;
+            console.log(22222)
         },
 
         pitchAction(index){
@@ -133,6 +135,7 @@ export default {
 
 <style scoped>
     .nav{
+        background: #fff;
         width: 100%;
         height: 40px;
         color: #666;

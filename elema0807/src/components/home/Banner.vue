@@ -4,13 +4,13 @@
             <div class="swiper-slide">
                 <li v-for="(item,index) in swiperArrOne" :key='index'
                 @click="changePage(index)">
-                    <img :src='swiperData[index].url'>
+                    <img :src='swiperArrOne[index].image_hash|formatimg'>
                     <span>{{swiperArrOne[index].name}}</span>
                 </li>
             </div>
             <div class="swiper-slide">
                 <li v-for="(item,index) in swiperArrTwo" :key='index'>
-                    <img :src='swiperData[index].url'>
+                    <img :src='swiperArrTwo[index].image_hash|formatimg'>
                     <span>{{swiperArrTwo[index].name}}</span>
                 </li>
             </div>
@@ -24,48 +24,6 @@ import {getHomebannerGoodsData} from '../../services/homedata.js'
 export default {
     data(){
         return{
-            swiperData:[
-                {
-                    url:'//fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'美食'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/c/7e/76a23eb90dada42528bc41499d6f8jpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'商超便利'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/0/d0/dd7c960f08cdc756b1d3ad54978fdjpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'水果'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'美食'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/c/7e/76a23eb90dada42528bc41499d6f8jpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'商超便利'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/0/d0/dd7c960f08cdc756b1d3ad54978fdjpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'水果'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/7/d8/a867c870b22bc74c87c348b75528djpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'美食'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/c/7e/76a23eb90dada42528bc41499d6f8jpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'商超便利'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/0/d0/dd7c960f08cdc756b1d3ad54978fdjpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'水果'
-                },
-                {
-                    url:'//fuss10.elemecdn.com/0/d0/dd7c960f08cdc756b1d3ad54978fdjpeg.jpeg?imageMogr/format/webp/thumbnail/!90x90r/gravity/Center/crop/90x90/',
-                    name:'水果'
-                }
-            ],
             pageList:{},
             bannerdata:{
                   latitude:22.4,        //纬度
