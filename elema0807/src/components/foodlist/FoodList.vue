@@ -79,8 +79,12 @@
 
                     <div class="activitynum" v-if="mainresdata.activities.length>0" @click="showActy()">
                         <span >{{mainresdata.activities.length}}个活动</span>
-                        <!-- <span class="triangel" ref="triangle">▼</span> -->
-                        <span class="triangel" ref="triangle">|</span>
+                        <!-- <span class="triangel" ref="triangle"></span> -->
+                        <span>
+                            <span class="triangel" ref="triangle">▼</span>
+                        </span>
+                        
+                        
 
                 
                     </div>
@@ -335,17 +339,28 @@ export default {
    
 }
 .activitynum{
+   
     margin-right: 4px;
+   
+}
+.activitynum span:nth-child(2){
+  position:relative;
+  display:inline-block;
+  width:20px;
+  height:16px;
+}
+.activitynum span:nth-child(2) span{
+    position:absolute;
 }
 .triangel{
-   transition: transform 1s;
-   font-size: 12px;
+   transition: transform 300ms;
+   
    
 }
 .triangel.up{
 
     transform: rotate(180deg);
-    font-size: 20px;
+    
 }
 
 </style>
