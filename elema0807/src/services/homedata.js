@@ -41,7 +41,6 @@ export function getHomeAddressData(keyword, latitude, longitude, limit) {
           latitude: latitude,
           longitude: longitude
         }
-
       })
       .then(response => {
 
