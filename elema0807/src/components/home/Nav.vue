@@ -3,11 +3,12 @@
     <div class="nav">
         <!-- 综合排序 -->
         <div class="rank" @click="rankAction()">
-            综合排序▼
+            {{sortTitle}}▼
         </div>
 
         <div class="rankAll" v-show="rankAllData">
-            <li v-for="(item,index) in rankArr" :key='index'>{{rankArr[index]}}</li>
+            <li v-for="(item,index) in rankArr" :key='index'
+            @click="pitchAction(index)">{{rankArr[index]}}</li>
         </div>
 
         <!-- 距离最近 -->
@@ -64,6 +65,7 @@
 export default {
     data(){
         return{
+            sortTitle:'综合排序',
             rankAllData:false,
             filtAllData:false,
             rankArr:[
@@ -117,7 +119,14 @@ export default {
         filtAction(){
             this.filtAllData = !this.filtAllData;
             this.rankAllData = false;
+        },
+
+        pitchAction(index){
+
+            this.sortTitle = this.rankArr[index];
+        
         }
+
     }
 }
 </script>
