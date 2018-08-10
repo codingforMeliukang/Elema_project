@@ -4,7 +4,7 @@
             <div class="foodsinfo">
                 <div class="foodlogo">
                     <div class="logomain">
-                        <img :src="mainresdata.image_path|formatimg" alt="">
+                        <img :src="(mainresdata.image_path)|formatimg('130x130','130x130')" alt="">
                     </div>
                 </div>
 

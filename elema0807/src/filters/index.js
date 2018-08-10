@@ -1,8 +1,19 @@
 export default {
     install(Vue){
         //图片过滤器
-        Vue.filter('formatimg', (value)=>{
+        Vue.filter('formatimg', (value,style,important)=>{
               // d78ace54115db9b99c505e2b3927f5f8png
+              let width=style
+              let noimpaddress
+              if(important){
+                  important=('!'+important+'r/')
+                  noimpaddress='gravity/Center/crop'
+              }
+              else{
+                  important=''
+                   noimpaddress=''
+              }
+               
               let url=value.split('')
               url.splice(1,0,'/')
               url.splice(4,0,'/')
@@ -16,7 +27,7 @@ export default {
                   laststr=laststr.substr(1)
                    url+='.'+laststr
               }
-              url+='?'+'imageMogr/format/webp/thumbnail/!130x130r/gravity/Center/crop/130x130/'
+              url+='?'+'imageMogr/format/webp/thumbnail/'+important+noimpaddress+width
               return url
             
         })
