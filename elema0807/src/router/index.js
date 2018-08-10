@@ -26,7 +26,7 @@ const routes = [
     ]
   },
   {
-    path:'/foods',
+    path:'/foods/:id',
     name:'foods',
     component:Foods
   },
@@ -50,10 +50,10 @@ const routes = [
     name: 'page5',
     component: Login
   },
-  {
-    path: '**',
-    redirect: '/home'
-  }
+  // {
+  //   path: '**',
+  //   redirect: '/home'
+  // }
   
 ];
 

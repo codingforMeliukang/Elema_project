@@ -5,11 +5,11 @@
                 <span>
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjU1MiA1LjYzM0wxNC41MDggMy41OSAyLjI0MyAxNS44NTMgMTQuNTA4IDI4LjQxbDIuMDQ0LTIuMDQzLTEwLjIyLTEwLjUxM3oiLz48L3N2Zz4=" alt="">
                 </span>
-                <h1>美食</h1>
+                <h1>{{name}}</h1>
             </div>
             <div class="header-list">
                 <ul>
-                    <li v-for="(item,index) in headerList" :key='index'>{{headerList[index]}}</li>
+                    <li v-for="(item,index) in headerList" :key='index'>{{headerList[index].name}}</li>
                 </ul>
                 <div class="more">
                     ↓
@@ -49,36 +49,68 @@
             </div>
         </div>
         <Nav></Nav>
+        <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
     </div>
 </template>
 
 <script>
 import Nav from '@/components/home/Nav.vue'
-import {getHomeTitleList} from '../../services/homedata.js'
+import FoodList from '@/components/foodlist/FoodList.vue'
+import {getHomeTitleList,getHomeRestaurantsData} from '../../services/homedata.js'
 export default {
     components:{
-        Nav
+        Nav,
+        FoodList
     },
     data(){
         return{
-            id:'',
-            headerList:['全部','简餐便当','小吃炸串','面食粥点','简餐便当','小吃炸串','面食粥点','简餐便当','小吃炸串','面食粥点'],
-            idRequestData:{
-                entry_id:this.id,
-                longitude:'114.2222',
-                latitude:'29.2231'
-            }
+            headerList:[],
+            name:'',
+            restaurantsobj:{
+            latitude:22.63336,        //纬度
+            longitude:113.814549,      //经度 
+            offset:0,
+            limit:8,
+                
+           },
+            restaurantsData:[]
         }
         
     },
+    created(){
+        getHomeRestaurantsData(this.restaurantsobj).then(result=>{
+            this.restaurantsData=result
+            console.log(this.restaurantsData)
+
+        })
+
+    },
+
+    
     mounted(){
-        console.log(this.$center)
-        this.$center.$on('idData',(data)=>{
-            console.log('接收数据成功')
-            console.log(data)  
-        });
-        getHomeTitleList(this.idRequestData).then(result=>{
-            console.log(result)
+
+        console.log(this.$route.params)
+        this.id = this.$route.params.id;
+        this.name =  this.$route.params.name;
+        var requestObj = {
+            id:this.id,
+            longitude:'114.2222',
+            latitude:'29.2231'
+        }
+        
+        getHomeTitleList(requestObj).then(result=>{
+            
+            var headerData = result;
+            this.headerList = headerData.data;
+          
+        })
+       
+
+        this.$center.$on('refreshDom',()=>{
+                 console.log('更新dom')
+            this.$nextTick(()=>{
+                this.$refs.foods.refreshDOM();
+            })
         })
     }
 }

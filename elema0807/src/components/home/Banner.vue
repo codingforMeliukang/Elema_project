@@ -25,6 +25,7 @@ export default {
     data(){
         return{
             id:'',
+            name:'',
             pageList:{},
             bannerdata:{
                   latitude:22.4,        //纬度
@@ -38,11 +39,14 @@ export default {
     },
     methods:{
         changePage(index){
-            let idNow = this.swiperArrOne[index].id
+            let idNow = this.swiperArrOne[index].id;
+            let nameNow = this.swiperArrOne[index].name;
+            console.log(this.swiperArrOne[index].name)
             this.id = idNow,
+            this.name = nameNow;
             console.log(this.id+'成功')
-            this.$center.$emit('idData',this.id)
-            this.$router.push({name:'foods',path:'/foods'})  
+            // this.$center.$emit('idData',this.id)
+            this.$router.push({name:'foods',params:{id:this.id,name:this.name}})  
         }
     },
 

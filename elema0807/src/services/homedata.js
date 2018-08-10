@@ -134,9 +134,10 @@ export function getHomebannerGoodsData(geo){
         return new Promise((resolve,reject)=>{
             axios.get(API.HOME_TITLE_LIST_API,{
                 params:{
-                    entry_id:params.entry_id,
+                    entry_id:params.id,
                     longitude:params.longitude,
-                    latitude:params.latitude
+                    latitude:params.latitude,
+                    terminal:'h5'
                 }
             })
             .then(response=>{
