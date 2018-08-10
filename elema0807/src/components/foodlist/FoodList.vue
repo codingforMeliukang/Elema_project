@@ -1,5 +1,5 @@
 <template>
-   <div class="foodlist">
+   <div class="foodlist" @click="getresid()">
         <div class="section">
             <div class="foodsinfo">
                 <div class="foodlogo">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
 
-                    <div class="activitynum" v-if="mainresdata.activities.length>0" @click="showActy()">
+                    <div class="activitynum" v-if="mainresdata.activities.length>0" @click.stop="showActy()">
                         <span >{{mainresdata.activities.length}}个活动</span>
                         <!-- <span class="triangel" ref="triangle"></span> -->
                         <span>
@@ -125,10 +125,10 @@ export default {
                 this.$center.$emit('refreshDom')
 
             }
-
-           
-            
-         
+        },
+        // 点击发送餐馆信息
+        getresid(){
+            this.$emit('send-resid')
         }
     },
     computed:{

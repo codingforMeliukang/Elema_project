@@ -114,8 +114,13 @@ type:0
 const HOME_REQUEST_RESTAURANTS_API = '/restapi/shopping/v3/restaurants';
 
 
+// 餐馆详情数据api
+// https://restapi.ele.me
+const Restaurant_Detail_Data_API = '/shopping/v2/menu?';
+
 export default {
     HOME_REQUEST_ADDRESS_API,
     HOME_REQUEST_RESTAURANTS_API,
     HOME_BANNER_GOODS_API,
+    Restaurant_Detail_Data_API,
 }

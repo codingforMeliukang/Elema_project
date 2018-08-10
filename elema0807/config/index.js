@@ -16,7 +16,7 @@ module.exports = {
         changeOrigin: true
       },
       '/shopping':{
-        target:'https://restapi.ele.me',
+        target:' https://restapi.ele.me',
         changeOrigin: true,
       }
 

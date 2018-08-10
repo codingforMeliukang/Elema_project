@@ -18,7 +18,7 @@
             <!-- 首页抢购部分  -->
                 <Activity></Activity>
             <!-- 餐馆列表  -->
-                <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
+                <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  @send-resid="goRstDetail(item)"></food-list>
         </div>
         
             
@@ -28,12 +28,13 @@
 </template>
 
 <script>
-import {getHomeAddressData,getHomebannerGoodsData,getHomeRestaurantsData} from './../../services/homedata.js'
-import Banner from '@/components/home/Banner.vue'
+import {getHomeAddressData,getHomebannerGoodsData,getHomeRestaurantsData,getRestaurantDetailData} from './../../services/homedata.js'
+import Banner from '@/components/home/Banner.vue';
 
-import FoodList  from  './../../components/foodlist/FoodList.vue' 
-import Activity from '@/components/home/Activity.vue'
-import Page from '@/components/page/Page.vue'
+import FoodList  from  './../../components/foodlist/FoodList.vue' ;
+import Activity from '@/components/home/Activity.vue';
+import Page from '@/components/page/Page.vue';
+import tm from './../../tmp.js'
 export default {
     components:{
         Banner,
@@ -65,7 +66,7 @@ export default {
                
             }
         },
-        requestRestaurantsdata(){
+        requestRestaurantsdata(){ //请求餐馆列表的数据
             this.cancelRequestRestaurant=false;
             getHomeRestaurantsData(this.restaurantsobj).then(result=>{
             this.restaurantsData=[...this.restaurantsData, ...result];
@@ -75,10 +76,15 @@ export default {
                     //计算
                    this.cancelRequestRestaurant=true;
                 })
-
-
-
              })
+        },
+        // 实现三个功能,a:实现ajax请求(子页面请求),把相应餐馆id的数据传给详情页(本页面传值)
+        goRstDetail(item){
+        //    console.log(item.restaurant.id)
+           let id=item.restaurant.id
+           this.$router.push({name:'restaurants',params:{id}}) //跳转到详情页
+           tm.setResItem(item.restaurant)
+ 
         }
        
     },

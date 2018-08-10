@@ -157,7 +157,23 @@ export function getHomeRestaurantsData(resobj){
     })
     }
 
+// 请求餐馆详情页的数据
 
+export function getRestaurantDetailData(id){
+   
+    return new Promise((resolve, reject)=>{
+        // 请求
+        // const Restaurant_Detail_Data_API = 'https://restapi.ele.me/shopping/v2/menu? restaurant_id=1243';
+        axios.get( API.Restaurant_Detail_Data_API+ 'restaurant_id='+id)
+        .then(response=>{
+          let data= response.data
+          resolve(data)   
+        })
+        .catch(error=>{
+            console.log('失败',error);
+        })
+    })
+    }
 
 
 
