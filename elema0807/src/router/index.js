@@ -50,10 +50,10 @@ const routes = [
     name: 'page5',
     component: Login
   },
-  // {
-  //   path: '**',
-  //   redirect: '/home'
-  // }
+  {
+    path: '**',
+    redirect: '/home'
+  }
   
 ];
 

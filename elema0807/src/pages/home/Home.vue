@@ -1,25 +1,29 @@
 <template>
 
-<page ref="foods">
+<page ref="foods" @scroll="scrollAction()">
     <div>
      
-        <div class="warp">
+        <div class="warp" >
             <!--首页头部 -->
             <Header></Header>
-            <Search></Search>
-            <!-- 首页轮播 -->
 
+            <!-- 首页搜索 -->
+            <Search></Search>
+            
+            <!-- 首页轮播 -->
             <Banner></Banner>
             
             <!-- 首页抢购部分  -->
-
             <Activity></Activity>
 
             <div class="recommend">
                 —— 推荐商家 ——
             </div>
 
+            <!-- 筛选栏 -->
             <Nav></Nav>
+
+            <!-- 商品详情 -->
              <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
       </div>
       
@@ -72,7 +76,9 @@ export default {
         }
     },
     methods:{
-       
+       scrollAction(){
+           console.log(1212)
+       }
        
     },
     created(){
@@ -118,7 +124,9 @@ export default {
         line-height: 36px;
         text-align: center;
         color: #000;
-        font-size: 14px
+        font-size: 14px;
     }
+
+   
 
 </style>

@@ -2,7 +2,7 @@
     <div id="warp">
         <div class="header">
             <div class="header-top">
-                <span>
+                <span @click="backAction()">
                     <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjU1MiA1LjYzM0wxNC41MDggMy41OSAyLjI0MyAxNS44NTMgMTQuNTA4IDI4LjQxbDIuMDQ0LTIuMDQzLTEwLjIyLTEwLjUxM3oiLz48L3N2Zz4=" alt="">
                 </span>
                 <h1>{{name}}</h1>
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="menu">
+        <!-- <div class="menu">
             <div class="menu-top">
                 <div class="menu-top-left">
                     省心套餐
@@ -47,7 +47,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
         <Nav></Nav>
         <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
     </div>
@@ -77,6 +77,12 @@ export default {
         }
         
     },
+
+    methods:{
+        backAction(){
+            this.$router.back();
+        }
+    },
     created(){
         getHomeRestaurantsData(this.restaurantsobj).then(result=>{
             this.restaurantsData=result
@@ -86,7 +92,7 @@ export default {
 
     },
 
-    
+
     mounted(){
 
         console.log(this.$route.params)

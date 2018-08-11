@@ -1,61 +1,68 @@
 <template>
     <!-- 导航栏 -->
-    <div class="nav">
-        <!-- 综合排序 -->
-        <div class="rank" @click="rankAction()">
-            {{sortTitle}}▼
-        </div>
+    <div>
+        <transition name="fade">
+        <div class="small-cover" v-show="isShow"></div>
+        </transition>
 
-        <div class="rankAll" v-show="rankAllData">
-            <li v-for="(item,index) in rankArr" :key='index'
-            @click="pitchAction(index)">{{rankArr[index]}}</li>
-        </div>
-
-        <!-- 距离最近 -->
-        <div class="distance">
-            距离最近
-        </div>
-
-        <!-- 品质联盟 -->
-        <div class="quality">
-            品质联盟
-        </div>
-
-        <!-- 筛选 -->
-        <div class="filt" @click="filtAction()">
-            筛选 ↓
-        </div>
-
-        <div class="filtAll" v-show="filtAllData">
-            <div class="multiple">
-                <p class="multipletitle">商家服务（可多选）</p>
-                <div class="multiple-arr">
-                    <li v-for="(item,index) in multipleArr" :key="index">
-                        <img :src="multipleImgArr[index]" alt="">{{multipleArr[index]}}
-                    </li>
-                </div>
+        <div class="big-cover"  v-show="isShow" @click="hideNav()"></div>
+        <div class="nav" ref='navs'>
+            <!-- 综合排序 -->
+            <div class="rank" @click="rankAction()">
+                {{sortTitle}}▼
             </div>
 
-            <div class="radio">
-                <p class="radiotitle">优惠活动（单选）</p>
-                <div class="radio-arr">
-                    <li v-for="(item,index) in radioArr" :key="index">
-                        {{radioArr[index]}}
-                    </li>
-                </div>
-            </div>
-            
-            <div class="pay">
-                <p class="paytitle">人均消费</p>
-                <div class="pay-arr">
-                    <li v-for="(item,index) in payArr" :key="index">
-                        {{payArr[index]}}
-                    </li>
-                </div>
+            <div class="rankAll" v-show="rankAllData" ref="sortAll">
+                <li v-for="(item,index) in rankArr" :key='index'
+                @click="pitchAction(index)">{{rankArr[index]}}</li>
             </div>
 
-            <div class="paysure">
-                <div class="paysure-left">清空</div><div class="paysure-right">确定</div>
+            <!-- 距离最近 -->
+            <div class="distance">
+                距离最近
+            </div>
+
+            <!-- 品质联盟 -->
+            <div class="quality">
+                品质联盟
+            </div>
+
+            <!-- 筛选 -->
+            <div class="filt" @click="filtAction()">
+                筛选 ↓
+            </div>
+
+            <div class="filtAll" v-show="filtAllData">
+                <div class="multiple">
+                    <p class="multipletitle">商家服务（可多选）</p>
+                    <div class="multiple-arr">
+                        <li v-for="(item,index) in multipleArr" :key="index">
+                            <img :src="multipleImgArr[index]" alt="">{{multipleArr[index]}}
+                        </li>
+                    </div>
+                </div>
+
+                <div class="radio">
+                    <p class="radiotitle">优惠活动（单选）</p>
+                    <div class="radio-arr">
+                        <li v-for="(item,index) in radioArr" :key="index">
+                            {{radioArr[index]}}
+                        </li>
+                    </div>
+                </div>
+                
+                <div class="pay">
+                    <p class="paytitle">人均消费</p>
+                    <div class="pay-arr">
+                        <li v-for="(item,index) in payArr" :key="index">
+                            {{payArr[index]}}
+                        </li>
+                    </div>
+                </div>
+
+                <div class="paysure">
+                    <div class="paysure-left">清空</div><div class="paysure-right">确定</div>
+                </div>
             </div>
         </div>
     </div>
@@ -65,6 +72,7 @@
 export default {
     data(){
         return{
+            isShow:false,
             sortTitle:'综合排序',
             rankAllData:false,
             filtAllData:false,
@@ -112,21 +120,34 @@ export default {
 
     methods:{
         rankAction(){
+            this.isShow = !this.isShow;
+            this.$refs.navs.style.position = 'absolute';
+            this.$refs.navs.style.top = 0;
             this.rankAllData = !this.rankAllData;
             this.filtAllData = false;
-            console.log(1111)
         },
 
         filtAction(){
             this.filtAllData = !this.filtAllData;
             this.rankAllData = false;
-            console.log(22222)
+            this.isShow = !this.isShow;
+            this.$refs.navs.style.position = 'absolute';
+            this.$refs.navs.style.top = 0;
         },
 
         pitchAction(index){
 
             this.sortTitle = this.rankArr[index];
         
+        },
+
+        hideNav(){
+            console.log(9191919)
+            this.isShow = !this.isShow;
+            this.$refs.navs.style.position = '';
+            this.$refs.navs.style.top = '';
+            this.rankAllData = false;
+            this.filtAllData = false;
         }
 
     }
@@ -134,6 +155,39 @@ export default {
 </script>
 
 <style scoped>
+    .big-cover{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: transparent;
+        z-index: 15;
+    }
+    .small-cover{
+        z-index: 5;
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        background: rgba(0,0,0,0.5);
+    }
+    @keyframes fadeIn {
+        0%{opacity: 0}
+        100%{opacity: 1}
+    }
+    @keyframes fadeOut {
+        0%{opacity: 1}
+        100%{opacity: 0}
+    }
+    .fade-enter-active{
+        animation: fadeIn 200ms;
+    }
+    .fade-leave-active{
+        animation: fadeOut 200ms;
+    }
+
     .nav{
         background: #fff;
         width: 100%;
@@ -152,11 +206,27 @@ export default {
     }
 
     .rankAll{
+        height: 100%;
+        width: 100%;
         position: absolute;
         left: 5px;
         top: 40px;
         line-height: 40px;
+        background: #fff;
     }
+
+    .rankAll li{
+        box-sizing: border-box;
+        padding-left: 14px;
+        background: #fff;
+        width: 100%;
+        position: relative;
+        left: -5px;
+        z-index: 10;
+        text-align: left;
+        border-bottom: 1px dotted #eee;
+    }
+    
 
     .distance{
         flex: 1
@@ -171,11 +241,14 @@ export default {
     }
 
     .filtAll{
+        box-sizing: border-box;
         position: absolute;
         top: 40px;
-        left: 5px;
+        /* left: 5px; */
         overflow: auto;
-        height: 450px;
+        height: 350px;
+        z-index: 10;
+        background: #fff;
     }
 
     .multiple-arr img{
@@ -205,6 +278,8 @@ export default {
         line-height: 35px;
         text-align: center;
         float: left;
+        z-index: 10;
+        background: #fff;
     }
 
     .paysure{

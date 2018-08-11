@@ -55,6 +55,9 @@ export default {
   padding: 10px 14px 0 14px;
   height: 35px;
   line-height: 35px;
+  width: 100%;
+ 
+  
 }
 .locationAddress {
   width: 60%;
