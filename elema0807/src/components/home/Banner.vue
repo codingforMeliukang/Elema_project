@@ -89,6 +89,7 @@ export default {
         width: 100%;
         height: 160px;
         padding-top: 10px;
+        background: #fff;
     }
 
     .swiper-slide li{

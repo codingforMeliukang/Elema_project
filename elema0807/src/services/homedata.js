@@ -181,17 +181,14 @@ export function getHomeRestaurantsData(resobj){
                 extra_filters:'home',
                 terminal:'h5'
             }
-
-        }
-        )
+        })
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
         .then(response=>{
           let data= response.data.items.map(item=>{
               item.restaurant
               
-          }
-          )
+          })
             resolve( response.data.items);
 
         })
@@ -213,6 +210,23 @@ export function getAddressInfo(latitude, longitude) {
         })
         .catch(error => {
           console.log(error)
+        })
+    })
+}
+
+export function getDiscoverParts(platform, block_index) {
+    return new Promise((resolve, reject) =>{
+        axios.get(API.DISCOVER_PARTS_API,{
+            params: {
+                platform: platform,
+                block_index: block_index
+            }
+        })
+        .then(response =>{
+            resolve(response)
+        })
+        .catch(error =>{
+            console.log(error)
         })
     })
 }

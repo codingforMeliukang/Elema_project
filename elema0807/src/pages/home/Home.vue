@@ -2,8 +2,8 @@
 
 <page ref="foods">
     <div>
-     
-        <div class="warp">
+        <Search v-show="showSearch"></Search>
+        <div class="warp" >
             <!--首页头部 -->
             <Header></Header>
             <Search></Search>
@@ -68,12 +68,18 @@ export default {
                 limit:8,
                 
            },
-            restaurantsData:[]
+            restaurantsData:[],
+            showSearch: false
         }
     },
     methods:{
-       
-       
+       handleContentScroll(position){
+			if(position < -90){
+				this.showSearch = true;
+			}else{
+				this.showSearch = false;
+			}
+		}
     },
     created(){
         getHomeRestaurantsData(this.restaurantsobj).then(result=>{
@@ -118,7 +124,8 @@ export default {
         line-height: 36px;
         text-align: center;
         color: #000;
-        font-size: 14px
+        font-size: 14px;
+        background:#fff;
     }
 
 </style>
