@@ -14,10 +14,6 @@ module.exports = {
       '/restapi':{
         target: 'https://h5.ele.me',
         changeOrigin: true
-      },
-      '/shopping':{
-        target:' https://restapi.ele.me',
-        changeOrigin: true,
       }
 
     },

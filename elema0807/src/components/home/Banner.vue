@@ -4,13 +4,13 @@
             <div class="swiper-slide">
                 <li v-for="(item,index) in swiperArrOne" :key='index'
                 @click="changePage(index)">
-                    <img :src='swiperArrOne[index].image_hash|formatimg'>
+                    <img :src="(swiperArrOne[index].image_hash)|formatimg('130x130','130x130')">
                     <span>{{swiperArrOne[index].name}}</span>
                 </li>
             </div>
             <div class="swiper-slide">
                 <li v-for="(item,index) in swiperArrTwo" :key='index'>
-                    <img :src='swiperArrTwo[index].image_hash|formatimg'>
+                    <img :src="(swiperArrTwo[index].image_hash)|formatimg('130x130','130x130')">
                     <span>{{swiperArrTwo[index].name}}</span>
                 </li>
             </div>

@@ -29,41 +29,38 @@ short_address:"福田区深圳市"
 
 
 //请求地址数据
-
-export function getHomeAddressData(keyword, latitude, longitude, limit) {
-  return new Promise((resolve, reject) => {
-    // 请求
-    axios.get(API.HOME_REQUEST_ADDRESS_API, {
-        params: {
-          keyword: keyword,
-          limit: limit,
-          latitude: latitude,
-          longitude: longitude
-
+export function getHomeAddressData(addressDataObj){
+    return new Promise((resolve, reject)=>{
+        // 请求
+        axios.get( API.HOME_REQUEST_ADDRESS_API,{
+         params: {
+            keyword:addressDataObj.keyword,
+            offset:addressDataObj.offset,
+            limit:addressDataObj.limit,
         }
-      })
-      .then(response => {
+        })
+        .then(response=>{
+          
+            console.log(response)
 
-        console.log(response)
-
-        let newData = response.data.map(item => {
-          return {
-            name: item.name, //地名
-            address: item.address, //地址
-            distance: item.distance, //距离
-            id: item.city_id, //城市id
-            latitude: item.latitude, //纬度
-            longitude: item.longitude //经度 
-          }
+            let data = response.map(item=>{
+            return {
+                name: item.name,               //地名
+                address: item.address,         //地址
+                distance: item.distance,       //距离
+                id:item.city_id,               //城市id
+                latitude:item.latitude,        //纬度
+                longitude:itme.longitude,      //经度 
+            }
         });
-        resolve(newData);
-
-      })
-      .catch(error => {
-        console.log('失败', error);
-      })
-  })
-}
+            resolve(data);
+            
+        })
+        .catch(error=>{
+            console.log('失败',error);
+        })
+    })
+    }
 
 /*
 请求得来数据参数:
@@ -85,71 +82,27 @@ templates[]=favourable_template&templates[]=svip_template&terminal=h5
 */
 
 //请求轮播图商品数据,限量抢购数据
-
 export function getHomebannerGoodsData(geo){
     return new Promise((resolve, reject)=>{
         // 请求
-        axios.get( API.HOME_BANNER_GOODS_API)
+        axios.get( API.HOME_BANNER_GOODS_API,{
+
+         params:{
+             latitude:geo.latitude,        //纬度
+             longitude:geo.longitude,      //经度 
+        }})
+
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+ .jepg
         .then(response=>{
-          
-        let data = response
-
+        let data = response 
         resolve(data);
-
-      })
-      .catch(error => {
-        console.log('失败', error);
-      })
-  })
-}
-
-
-
-//请求餐馆数据列表
-// export function getHomeRestaurantsData() {
-//   return new Promise((resolve, reject) => {
-//     // 请求
-//     axios.get(API.HOME_REQUEST_RESTAURANTS_API)
-//       //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
-
-//       .then(response => {
-//         let data = response.items.map(item => {
-//           item.restaurant
-//         })
-//         resolve(data);
-
-
-//       })
-//       .catch(error => {
-//         console.log('失败', error);
-//       })
-
-//     })
-//     }
-
-    //请求商品头部列表
-
-    export function getHomeTitleList(params){
-        return new Promise((resolve,reject)=>{
-            axios.get(API.HOME_TITLE_LIST_API,{
-                params:{
-                    entry_id:params.id,
-                    longitude:params.longitude,
-                    latitude:params.latitude,
-                    terminal:'h5'
-                }
-            })
-            .then(response=>{
-                resolve(response)
-            })
-            .catch(error=>{
-                console.log('失败',error)
-            })
         })
+        .catch(error=>{
+            console.log('失败',error);
+        })
+    })
     }
 
-        
 
    /* https://h5.ele.me/restapi/shopping/v3/restaurants?latitude=22.54286
     &longitude=114.059563&offset=0&limit=8&extras[]=activities&
@@ -188,7 +141,6 @@ export function getHomeRestaurantsData(resobj){
 //图片的地址加上http://fuss10.elemecdn.com/图片地址+.png
 
         .then(response=>{
-            console.log(response)
           let data= response.data.items.map(item=>{
               item.restaurant
               
@@ -196,46 +148,23 @@ export function getHomeRestaurantsData(resobj){
           )
             resolve( response.data.items);
 
-        })
-        .catch(error=>{
-            console.log('失败')
-        })
-    })
-}
-export function getAddressInfo(latitude, longitude) {
-    return new Promise((resolve, reject) => {
-      axios.get(API.HOME_HEADER_ADRESS_API, {
-          params: {
-            latitude: latitude,
-            longitude: longitude
-          }
-        })
-        .then(response => {
-          resolve(response.data.name);
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    })
-}
-
-
-
-
-// 请求餐馆详情页的数据
-
-export function getRestaurantDetailData(id){
-   
-    return new Promise((resolve, reject)=>{
-        // 请求
-        // const Restaurant_Detail_Data_API = 'https://restapi.ele.me/shopping/v2/menu? restaurant_id=1243';
-        axios.get( API.Restaurant_Detail_Data_API+ 'restaurant_id='+id)
-        .then(response=>{
-          let data= response.data
-          resolve(data)   
+            
         })
         .catch(error=>{
             console.log('失败',error);
         })
     })
     }
+
+
+
+
+
+
+
+
+
+
+
+
+

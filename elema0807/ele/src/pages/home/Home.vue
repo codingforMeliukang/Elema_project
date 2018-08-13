@@ -2,67 +2,45 @@
 <page ref="foods" :onScroll="handlePageScroll">
     <div>
      
-        <div class="warp" >
+        <div class="warp">
             <!--首页头部 -->
-            <Header></Header>
-
-            <!-- 首页搜索 -->
-            <Search></Search>
-            
+            <div class="head">
+                <div class="headTop">
+                    <span></span><span>深圳西部硅谷</span><span>↓</span>
+                </div>
+                <div class="headInp">
+                    <input type="text" placeholder="搜索饿了么商家、商品名称">
+                </div>   
+            </div>
             <!-- 首页轮播 -->
             <Banner></Banner>
             
             <!-- 首页抢购部分  -->
-            <Activity></Activity>
-
-            <div class="recommend">
-                —— 推荐商家 ——
-            </div>
-
-            <!-- 筛选栏 -->
-            <Nav></Nav>
-
-            <!-- 商品详情 -->
-             <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
-      </div>
-      
-
+                <Activity></Activity>
+            <!-- 餐馆列表  -->
+                <food-list v-for="(item,index) in restaurantsData" :key="index" :resdata="item"  ></food-list>
+        </div>
+        
             
     </div>
-
-    <transition enter-active-class="slideInRight" leave-active-class="slideOutRight">
-        <router-view></router-view>
-    </transition>
-
-
 </page>
 
 </template>
 
 <script>
-import {getHomeAddressData,getHomebannerGoodsData,getHomeRestaurantsData,getRestaurantDetailData} from './../../services/homedata.js'
-
+import {getHomeAddressData,getHomebannerGoodsData,getHomeRestaurantsData} from './../../services/homedata.js'
 import Banner from '@/components/home/Banner.vue'
 
 import FoodList  from  './../../components/foodlist/FoodList.vue' 
 import Activity from '@/components/home/Activity.vue'
 import Page from '@/components/page/Page.vue'
-import Nav from '@/components/home/Nav.vue'
-import Foods from '@/pages/home/Foods.vue'
-import Search from "@/components/home/Search.vue";
-import Header from "@/components/home/Header.vue";
-import tm from './../../tmp.js'
 export default {
     components:{
         Banner,
+        FoodList,
         Activity,
-        Nav,
-        Foods,
-        Search,
-        Header,
-        Page,
-        FoodList
-    },
+        Page
+},
     data(){
         return{
            restaurantsobj:{
@@ -87,7 +65,7 @@ export default {
                
             }
         },
-        requestRestaurantsdata(){ //请求餐馆列表的数据
+        requestRestaurantsdata(){
             this.cancelRequestRestaurant=false;
             getHomeRestaurantsData(this.restaurantsobj).then(result=>{
             this.restaurantsData=[...this.restaurantsData, ...result];
@@ -97,15 +75,10 @@ export default {
                     //计算
                    this.cancelRequestRestaurant=true;
                 })
+
+
+
              })
-        },
-        // 实现三个功能,a:实现ajax请求(子页面请求),把相应餐馆id的数据传给详情页(本页面传值)
-        goRstDetail(item){
-        //    console.log(item.restaurant.id)
-           let id=item.restaurant.id
-           this.$router.push({name:'restaurants',params:{id}}) //跳转到详情页
-           tm.setResItem(item.restaurant)
- 
         }
        
     },
@@ -124,16 +97,22 @@ export default {
        }
        
   
-
 }
     
-
-
 </script>
 
-<style>
+<style scoped>
+    .head{
+        
+        height: 90px;
+        background: #0085ff;
+        padding: 10px 10px 0 10px;
+    }
 
-
+    .headTop{
+        color: #fff;
+        margin-bottom: 10px;
+    }
 
     .headInp input{
         width: 100%;
@@ -142,15 +121,4 @@ export default {
         text-align: center
     }
     
-    .recommend{
-        width:100%;
-        height: 36px;
-        line-height: 36px;
-        text-align: center;
-        color: #000;
-        font-size: 14px;
-    }
-
-   
-
 </style>

@@ -7,10 +7,6 @@ import filters from './filters'
 //为了非父子组件传值
 Vue.prototype.$center = new Vue();
 
-
-Vue.config.productionTip = false
-
-
 Vue.use(filters)
 new Vue({
   el: '#app',
