@@ -135,6 +135,24 @@ const HOME_TITLE_LIST_API = '/restapi/shopping/v2/foods_page/sift_factors'
 const HOME_HEADER_ADRESS_API = '/restapi/bgs/poi/reverse_geo_coding';
 const Restaurant_Detail_Data_API = '/shopping/v2/menu?';
 
+/*
+
+https://h5.ele.me/restapi/member/v1/discover?platform=1&block_index=0 金币
+参数：
+    platform: 1
+    block_index: 0
+*/
+
+const DISCOVER_PARTS_API = '/restapi/member/v1/discover'
+
+/*
+
+https://h5.ele.me/restapi/member/gifts/suggest 限时好礼
+
+*/
+
+const DISCOVER_DISCOUNT_API = '/restapi/member/gifts/suggest'
+
 
 export default {
     HOME_REQUEST_ADDRESS_API,
@@ -142,5 +160,7 @@ export default {
     HOME_BANNER_GOODS_API,
     HOME_HEADER_ADRESS_API,
     HOME_TITLE_LIST_API,
-    Restaurant_Detail_Data_API
+    Restaurant_Detail_Data_API,
+    DISCOVER_PARTS_API,
+    DISCOVER_DISCOUNT_API
 }

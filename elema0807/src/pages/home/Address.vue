@@ -17,14 +17,14 @@
                 <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fangdajing"></use>
                 </svg>
-                <input type="search" placeholder="请输入地址" class="index-2V7cn_0" v-model="value" @keyup.enter="searchAction()">
+                <input type="search" placeholder="请输入地址" class="index-2V7cn_0" v-model="value">
             </div>
         </div>
         <ul>
             <li class="addressList" v-for="(address,index) in addressList" :key="index" @click="selectAction(address)">
                 <div class="detailed-address">
                     <p>{{address.name}}</p>
-				    <p>{{address.address}}</p>
+				            <p>{{address.address}}</p>
                 </div>
                 <div>{{address.distance}}</div>
             </li>
@@ -47,17 +47,19 @@ export default {
       location: state => state.location.locValue
     })
   },
-  methods: {
-    ...Vuex.mapActions({
-      userSelectLocation: "location/userSelectLocation"
-    }),
-    searchAction() {
+  watch:{
+    value(){
       let { longitude, latitude } = this.location;
       getHomeAddressData(this.value, latitude, longitude, 20).then(result => {
         console.log(result);
         this.addressList = result;
       });
-    },
+    }
+  },
+  methods: {
+    ...Vuex.mapActions({
+      userSelectLocation: "location/userSelectLocation"
+    }),
     selectAction(address) {
       console.log(address);
       this.userSelectLocation({

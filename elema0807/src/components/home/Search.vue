@@ -23,6 +23,11 @@ export default {
     background-image: linear-gradient(90deg,#0af,#0085ff);
     padding: 8px 14px;
 }
+.search-wrapper.top{
+    position: absolute;
+	top: 0;
+	left: 0;
+}
 .headSearch {
   display: -webkit-box;
   display: -webkit-flex;

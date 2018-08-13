@@ -29,9 +29,10 @@ export default {
 
 <style>
     .activity{
-        margin-bottom: 8px;
         padding: 0 10px;
+        padding-bottom: 8px;
         display: flex;
+        background: #fff;
     }
 
     .act-left,.act-right{

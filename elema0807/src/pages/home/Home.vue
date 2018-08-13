@@ -1,7 +1,7 @@
 <template>
 <page ref="foods" :onScroll="handlePageScroll">
     <div>
-     
+
         <div class="warp" >
             <!--首页头部 -->
             <Header></Header>
@@ -108,6 +108,7 @@ export default {
  
         }
        
+
     },
     created(){
         this.requestRestaurantsdata();
@@ -149,6 +150,7 @@ export default {
         text-align: center;
         color: #000;
         font-size: 14px;
+        background:#fff;
     }
 
    
